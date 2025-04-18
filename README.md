@@ -34,4 +34,24 @@
 
 ## 03 creating own react library and jsx
 
--
+-   create a react custom element - how reacts takes elements
+-   created func that render element into container/root
+
+-   vite
+
+    -   create MyApp func return html -> render MyApp()/ <MyApp/>
+
+    -   how reacts aspects elements behind the scene
+
+        ```javascript
+        const customElementreact = React.createElement(
+            "a",
+            { href: "https://youtube.com", target: "_blank" },
+            "Visit YouTube customElementreact",
+            username
+        );
+        ```
+
+-   {} -> evaluated expression javascript, variable
+
+-   looked react source code

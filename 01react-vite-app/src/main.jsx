@@ -30,7 +30,7 @@ const username = "Amrit Sharma";
 const customElementreact = React.createElement(
     "a",
     { href: "https://youtube.com", target: "_blank" },
-    "Visit YouTube customElementreact",
+    "Visit YouTube custom Element react ",
     username
 );
 
@@ -40,8 +40,8 @@ createRoot(document.getElementById("root")).render(
     // MyApp()
     // <MyApp/>
 
-    // customElement
     // anotherElement
+    // customElement //not work as react aspect another syntax
 
-    //   customElementreact
+    // customElementreact
 );
