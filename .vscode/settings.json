@@ -1,0 +1,11 @@
+{
+    "editor.formatOnSave": true,
+    "prettier.tabWidth": 4,
+    "[yaml]": {
+        "editor.tabSize": 4
+    },
+    "[dockercompose]": {
+        "editor.tabSize": 4
+    },
+    "editor.detectIndentation": false
+}
