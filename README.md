@@ -55,3 +55,15 @@
 -   {} -> evaluated expression javascript, variable
 
 -   looked react source code
+
+## 04 Hooks and counter Project
+
+-   react react on variable updation
+
+-   data is updated through hooks
+
+-   useState: propegate chage in UI
+
+    ```javascript
+    let [counter, setCounter] = useState(15);
+    ```
