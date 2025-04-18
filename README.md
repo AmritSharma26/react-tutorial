@@ -1,6 +1,6 @@
 # This is React Tutorial
 
-## 01 created creact app
+# 01 created creact app
 
 -   `npx create-react-app 01-react-app`
 
@@ -14,7 +14,7 @@
 
 -   library loose, framework strict
 
-## 02 Understand the react flow and structure
+# 02 Understand the react flow and structure
 
 -   react DOM implementation of react on web, native on mobile
 
@@ -32,7 +32,7 @@
 -   one fragment
 -   component name camelCase
 
-## 03 creating own react library and jsx
+# 03 creating own react library and jsx
 
 -   create a react custom element - how reacts takes elements
 -   created func that render element into container/root
@@ -56,7 +56,7 @@
 
 -   looked react source code
 
-## 04 Hooks and counter Project
+# 04 Hooks and counter Project
 
 -   react react on variable updation
 
@@ -67,3 +67,22 @@
     ```javascript
     let [counter, setCounter] = useState(15);
     ```
+
+# Virtual DOM, fiber and reconscillation
+
+-   createroot() -> bts create DOM like structure, then compare it with browser DOM and repaint only changes(reconcillation)
+
+-   Reconciliation : changes between two UI states efficiently using tree
+
+-   React fiber : help in hydration(attaching interactive JavaScript behaviors to server-rendered HTML)
+
+    [React Fiber Architecture](https://github.com/acdlite/react-fiber-architecture)
+
+-   use key in iteration to improve performance of list...
+
+## 🔑 Key Features of React Fiber
+
+-   **Incremental rendering**: Work is split into chunks, allowing React to render in steps rather than all at once.
+-   **Pause, reuse, and abort rendering**: Rendering work can be paused, reused, or aborted as needed.
+-   **Prioritized updates**: Assign priorities to updates for a smoother and more responsive UI.
+-   **Concurrency support**: Enables concurrent rendering using primitives like `Suspense` and `startTransition`.
