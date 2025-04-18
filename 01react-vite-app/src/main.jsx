@@ -1,13 +1,13 @@
-import React, { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
 
-function MyApp(){
-  return(
-    <div>
-      <h1>Custom App</h1>
-    </div>
-  )
+function MyApp() {
+    return (
+        <div>
+            <h1>Custom App</h1>
+        </div>
+    );
 }
 
 // const customElement = {
@@ -20,27 +20,28 @@ function MyApp(){
 // }
 
 const anotherElement = (
-  <a href='https://youtube.com' target='_blank'>Visit YouTube anotherElement</a>
-)
+    <a href="https://youtube.com" target="_blank">
+        Visit YouTube anotherElement
+    </a>
+);
 
-const username = "Amrit Sharma"
+const username = "Amrit Sharma";
 
 const customElementreact = React.createElement(
-  'a',
-  {href : 'https://youtube.com', target : '_blank'},
-  'Visit YouTube customElementreact',
-  username
-)
+    "a",
+    { href: "https://youtube.com", target: "_blank" },
+    "Visit YouTube customElementreact",
+    username
+);
 
-createRoot(document.getElementById('root')).render(
-  // <App />
-  
-  // MyApp()
-  // <MyApp/>
+createRoot(document.getElementById("root")).render(
+    <App />
 
-  // customElement
-  // anotherElement
+    // MyApp()
+    // <MyApp/>
 
-  customElementreact
+    // customElement
+    // anotherElement
 
-)
+    //   customElementreact
+);

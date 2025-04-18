@@ -1,11 +1,14 @@
-function App() {
-  const username = "Amrit Sharma"
+import Chai from "./Chai";
 
-  return (
-    <>
-      <h1>React Vite App {username}</h1>
-    </>
-  )
+function App() {
+    const username = "Amrit Sharma";
+
+    return (
+        <>
+            <h1>React Vite App | {username}</h1>
+            <Chai />
+        </>
+    );
 }
 
-export default App
+export default App;
