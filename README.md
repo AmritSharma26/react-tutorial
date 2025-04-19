@@ -68,6 +68,24 @@
     let [counter, setCounter] = useState(15);
     ```
 
+-   When you call setCounter(counter + 1) multiple times in a row, React batches those updates
+
+```javascript
+const addValue = () => {
+    setCounter(counter + 1); // 0 + 1 => 1
+    setCounter(counter + 1); // still 0 + 1 => 1
+};
+```
+
+-   Correct Way
+
+```Javascript
+    const addValue = () => {
+        setCounter(prev => prev + 1);
+        setCounter(prev => prev + 1);
+    };
+```
+
 # Virtual DOM, fiber and reconscillation
 
 -   createroot() -> bts create DOM like structure, then compare it with browser DOM and repaint only changes(reconcillation)
@@ -86,3 +104,15 @@
 -   **Pause, reuse, and abort rendering**: Rendering work can be paused, reused, or aborted as needed.
 -   **Prioritized updates**: Assign priorities to updates for a smoother and more responsive UI.
 -   **Concurrency support**: Enables concurrent rendering using primitives like `Suspense` and `startTransition`.
+
+# 05 Tailwind and props
+
+-   Install Tailwind
+
+`npm install tailwindcss @tailwindcss/vite`
+
+-   props - reusable components, pass value to components
+
+    -   passing string, array, objects
+    -   destructuring prop -> {, , }
+    -   default value by = or ||
