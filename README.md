@@ -116,3 +116,21 @@ const addValue = () => {
     -   passing string, array, objects
     -   destructuring prop -> {, , }
     -   default value by = or ||
+
+# 06 Project 1 BackgroundColor Changer
+
+-   use useState to set color
+-   created button component and pass them props
+
+```javascript
+colorBtn.jsx
+function ColorBtn({ color, text, textColor, onClick }) {}
+
+App.jsx
+<ColorBtn
+    color="#FF2C2C"
+    text="Red"
+    textColor="#FFFFFF"
+    onClick={handleColorChange}
+/>;
+```

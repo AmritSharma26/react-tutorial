@@ -3,9 +3,12 @@ import { useState } from "react";
 
 function App() {
     let [bgColor, setbgColor] = useState("#333399");
+    let [colorName, setColorName] = useState("Blue");
 
-    const handleColorChange = (color) => {
+    const handleColorChange = (color, text) => {
         setbgColor(color);
+        setColorName(text);
+        // console.log(colorName);
     };
 
     return (
@@ -13,11 +16,14 @@ function App() {
             <div
                 id="warapper"
                 style={{ backgroundColor: bgColor }}
-                className={`w-full h-[100vh] flex items-end justify-center`}
+                className={`w-full h-[100vh] flex items-center justify-center`}
             >
+                <div className="bg-gray-800 text-white text-4xl font-semibold px-10 py-5 rounded">
+                    {colorName}
+                </div>
                 <div
                     id="color-container"
-                    className="flex flex-row flex-wrap gap-2 max-w-11/12 bg-white w-fit rounded-2xl p-2 m-5"
+                    className="fixed bottom-0 flex flex-row flex-wrap gap-2 max-w-11/12 bg-white w-fit rounded-2xl p-2 m-5"
                 >
                     <ColorBtn
                         color="#FF2C2C"
