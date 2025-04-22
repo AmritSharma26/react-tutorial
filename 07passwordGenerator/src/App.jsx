@@ -1,116 +1,124 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 
 function App() {
-    const [passlength, setpassLength] = useState(8);
-    const [isNums, setisNums] = useState(false);
-    const [isChar, setisChar] = useState(false);
+    const [isNumber, setIsNumber] = useState(false);
+    const [isCharacter, setIsCharacter] = useState(false);
+    const [passLength, setpassLength] = useState(8);
     const [password, setPassword] = useState("");
+    const inputRef = useRef(null);
 
-    const passwordRef = useRef(null);
-
-    // const changePassLength = (e) => {
-    //     // console.log(e.target.value);
-    //     setpassLength(e.target.value);
-    // };
-
-    const passGenerator = useCallback(() => {
+    const generatePassword = useCallback(() => {
         let pass = "";
-        let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        if (isNums) str += "0123456789";
-        if (isChar) str += "!@#$%^&*()_+-=[]{}|;:'\",.<>?/`~\\";
-
-        for (let i = 1; i <= passlength; i++) {
-            let rdmLetterIdx = Math.floor(Math.random() * str.length + 1);
-            pass += str.charAt(rdmLetterIdx);
+        let charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        if (isNumber) {
+            charSet += "1234567890";
         }
-        setPassword(pass);
-    }, [passlength, isNums, isChar, setPassword]); // array itmes store in chache
+        if (isCharacter) {
+            charSet += "`~!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?";
+        }
 
-    const copyPassword = useCallback(() => {
-        window.navigator.clipboard.writeText(password);
-        console.log(passwordRef);
-        passwordRef.current?.select();
+        for (let i = 0; i < passLength; i++) {
+            const charSetLen = charSet.length;
+            let rdmIdx = Math.floor(Math.random() * charSetLen);
+            pass += charSet[rdmIdx];
+        }
+        // console.log(charSet);
+        // console.log(passLength);
+        // console.log(pass);
+        // console.log("Number : ", isNumber);
+        // console.log("Special Characters : ", isCharacter);
+        setPassword(pass);
+    }, [passLength, isNumber, isCharacter, setPassword]); // optimize - array's itmes store in chache
+
+    const copyPassword = () => {
+        const input = inputRef.current;
+        input.select();
         // passwordRef.current?.setSelectionRange(0, 10);
-    }, [password]);
+        navigator.clipboard.writeText(input.value); // next js not have window -> server side rendering
+    };
 
     useEffect(() => {
-        passGenerator();
-    }, [passlength, isNums, isChar, passGenerator]); //array item me change run again
+        generatePassword();
+    }, [passLength, isNumber, isCharacter, generatePassword]); // rerun
 
     return (
         <>
-            <div
-                id="wrapper"
-                className="flex flex-col w-full h-screen items-center justify-center box-border bg-gray-950 "
-            >
-                <div className="flex flex-col bg-gray-700 text-white p-6 m-6 rounded-2xl shadow-2xl min-w-[300px]">
-                    <h1 className="text-2xl font-extrabold py-2 text-center">
-                        Password Genrator
+            <div className="wrapper bg-gray-800 w-full h-screen min-w-[500px] flex items-center justify-center text-white">
+                <div className="flex flex-col items-center justify-between gap-2 w-[600px]">
+                    <h1 className="font-bold text-4xl mb-6">
+                        Password Generator
                     </h1>
-                    <div id="input-container" className="flex items-center">
-                        <input
-                            type="text"
-                            className="border rounded-md my-4 w-[80%] p-1 outline-none"
-                            placeholder="Password"
-                            value={password}
-                            readOnly
-                            ref={passwordRef}
-                        />
-                        <button
-                            className="w-[20%] bg-blue-700 m-2 p-1 rounded-md cursor-pointer"
-                            onClick={() => {
-                                copyPassword();
-                            }}
-                        >
-                            copy
-                        </button>
-                    </div>
-                    <div
-                        id="setup-container"
-                        className="flex flex-wrap items-center justify-between"
-                    >
-                        <input
-                            type="range"
-                            name="passlength"
-                            id="lenSlider"
-                            min={6}
-                            max={100}
-                            value={passlength}
-                            // defaultValue={}
-                            className="m-1 p-1 cursor-pointer"
-                            // onChange={(e) => changePassLength(e)}
-                            onChange={(e) => {
-                                setpassLength(e.target.value);
-                            }}
-                        />
-                        <label htmlFor="passlength" className="m-1 p-1 w-23">
-                            Length ({passlength})
-                        </label>
-
-                        <div id="checkNum" className="m-1 p-1">
+                    <div className="flex flex-col gap-2 w-full bg-gray-700 p-6 rounded shadow-2xl">
+                        <div className="input-field w-full mb-3 rounded overflow-hidden">
                             <input
-                                type="checkbox"
-                                name="numbers"
-                                id=""
-                                onChange={(e) => {
-                                    setisNums((prev) => !prev);
-                                    console.log(e.target.checked);
-                                }}
+                                type="text"
+                                id="pass-input"
+                                readOnly
+                                className="bg-white w-9/12 text-purple-800 text-2xl py-2 px-4 font-semibold"
+                                value={password}
+                                onChange={generatePassword}
+                                ref={inputRef}
                             />
-                            <label htmlFor="numbers">Numbers</label>
+                            <button
+                                className="bg-purple-800 font-semibold w-3/12 px-2 py-2 text-2xl cursor-pointer"
+                                onClick={copyPassword}
+                            >
+                                copy
+                            </button>
                         </div>
-
-                        <div id="checkChar" className="m-1 p-1">
-                            <input
-                                type="checkbox"
-                                name="char"
-                                id=""
-                                onChange={(e) => {
-                                    setisChar((prev) => !prev);
-                                    console.log(e.target.checked);
-                                }}
-                            />
-                            <label htmlFor="char">Characters</label>
+                        <div className="pass-filters w-full flex flex-wrap justify-between gap-3">
+                            <div className="lenght-filter flex items-center gap-3 text-2xl w-[250px]">
+                                <input
+                                    type="range"
+                                    id="pass-len-slider"
+                                    className="w-full mt-1"
+                                    value={passLength}
+                                    onChange={(e) => {
+                                        setpassLength(e.target.value);
+                                    }}
+                                    min={5}
+                                    max={20}
+                                />
+                                <label htmlFor="pass-len-slider">
+                                    length(<span>{passLength}</span>)
+                                </label>
+                            </div>
+                            <div className="number-filter flex items-center gap-3">
+                                <input
+                                    type="checkbox"
+                                    name="number-check"
+                                    id="number-check"
+                                    className="h-5 w-5"
+                                    onChange={() => {
+                                        setIsNumber((prev) => !prev);
+                                    }}
+                                />
+                                <label
+                                    htmlFor="number-check"
+                                    className="text-2xl"
+                                >
+                                    Number
+                                </label>
+                            </div>
+                            <div className="character-filter flex items-center gap-3">
+                                <input
+                                    type="checkbox"
+                                    name="char-check"
+                                    id="char-check"
+                                    className="h-5 w-5"
+                                    onChange={(e) => {
+                                        setIsCharacter((prev) => !prev);
+                                    }}
+                                />
+                                <label
+                                    htmlFor="char-check"
+                                    className="text-2xl"
+                                >
+                                    Characters
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>

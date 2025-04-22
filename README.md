@@ -134,3 +134,14 @@ App.jsx
     onClick={handleColorChange}
 />;
 ```
+
+# 07 Password Generator
+
+-   useState: manage UI state (toggles, length, password)
+-   useRef: for direct DOM access (copy input value)
+-   useCallback: memoize functions for dependency optimization
+-   useEffect: auto-run password gen on deps change
+-   Password generation logic with dynamic charset
+-   Clipboard API: `navigator.clipboard.writeText`
+
+# 08 Custom hooks in react | Currency Project
