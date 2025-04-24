@@ -144,4 +144,22 @@ App.jsx
 -   Password generation logic with dynamic charset
 -   Clipboard API: `navigator.clipboard.writeText`
 
-# 08 Custom hooks in react | Currency Project
+# 08 Custom hooks in react | Currency Converter App
+
+A simple React app to convert currencies using a live API.
+
+### 🔗 API Integration
+
+-   Used real-time rates from:  
+    `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency}.json`
+
+### 🧠 React Concepts Practiced
+
+-   **Dropdown Optimization**: Dynamic currency list from API.
+-   **Swap Function**: Easily switch between "from" and "to" currencies.
+-   **Reusable Component**: `CurrInput` used for both input fields.
+-   **Custom Hook**: `useCurrInfo` for clean and reusable API logic.
+-   **Keys in Loops**: Used `key` properly in dropdown rendering.
+-   **useId Hook**: Ensured unique input IDs for accessibility.
+
+Great practice for React state, hooks, component reusability, and working with APIs.

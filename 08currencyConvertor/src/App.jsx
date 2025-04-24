@@ -1,78 +1,68 @@
 import { useState } from "react";
-import CurrencyCard from "./components/currencyCard";
-import useCurrencyInfo from "./hooks/useCurrencyInfo";
+import CurrInput from "./components/CurrInput";
+import useCurrInfo from "./hooks/useCurrInfo";
 
 function App() {
+    // const [amount, setamount] = useState(0);
     const [amount, setamount] = useState(0);
-    const [convertedAmount, setconvertedAmount] = useState(0);
-    const [fromCurrency, setfromCurrency] = useState("usd");
-    const [toCurrency, settoCurrency] = useState("inr");
+    const [convertedAmt, setConvertedAmt] = useState(0);
+    const [fromCurr, setFromCurr] = useState("usd");
+    const [toCurr, setToCurr] = useState("inr");
 
-    const data = useCurrencyInfo(fromCurrency);
-    const currencyList = Object.keys(data);
+    const data = useCurrInfo(fromCurr);
+    const currList = Object.keys(data);
+    // console.log(currList);
 
-    function convert() {
-        setconvertedAmount((amount * data[toCurrency]).toFixed(2));
-    }
+    const convert = () => {
+        setConvertedAmt((amount * data[toCurr]).toFixed(2));
+    };
 
     const swap = () => {
-        setfromCurrency(toCurrency);
-        settoCurrency(fromCurrency);
-        setamount(convertedAmount);
-        setconvertedAmount(amount);
+        setConvertedAmt(amount);
+        setamount(convertedAmt);
+        setFromCurr(toCurr);
+        setToCurr(fromCurr);
     };
 
     return (
         <>
-            <div
-                id="wrapper"
-                className="w-full h-[100vh] box-border bg-gradient-to-t from-blue-500 to-blue-950 flex items-center justify-center"
-            >
-                <div
-                    id="container"
-                    className=" w-[28rem] border border-white rounded-lg m-4 p-4 flex flex-col"
-                    style={{ backgroundColor: "rgba(255, 255, 255, 0.25)" }}
-                >
-                    <div
-                        id="fromToContainer"
-                        className="relative flex flex-col"
-                    >
-                        <CurrencyCard
-                            label="From"
-                            amount={amount}
-                            currencyList={currencyList}
-                            selectCurrency={fromCurrency}
-                            onAmountChange={(amount) => {
-                                setamount(amount);
-                            }}
-                            onCurrencyChange={(currency) =>
-                                setfromCurrency(currency)
-                            }
-                        />
-                        <button
-                            className=" bg-blue-700 cursor-pointer border-2 border-white absolute px-3 rounded-md text-white top-1/2 left-1/2 -translate-x-[50%] -translate-y-1/2"
-                            onClick={swap}
-                        >
-                            swap
-                        </button>
-                        <CurrencyCard
-                            label="To"
-                            amount={convertedAmount}
-                            currencyList={currencyList}
-                            selectCurrency={toCurrency}
-                            onCurrencyChange={(currency) =>
-                                settoCurrency(currency)
-                            }
-                            amountDisable
-                        />
-                    </div>
-
+            <div className="wrapper w-full h-screen text-white bg-gray-800 flex items-center justify-center">
+                <div className="relative convertor-container bg-[#ffffff30] w-lg border border-white rounded-md p-4 m-5 shadow-2xl flex flex-col items-center">
+                    <CurrInput
+                        currInputType="From"
+                        amount={amount}
+                        currency={fromCurr}
+                        currList={currList}
+                        onAmountChange={(amount) => {
+                            setamount(amount);
+                        }}
+                        onCurrencyChange={(currency) => {
+                            setFromCurr(currency);
+                        }}
+                    />
                     <button
-                        className="bg-blue-700 rounded-lg my-2 mx-1 p-2 cursor-pointer"
+                        className="absolute left-1/2 top-24 transform -translate-x-1/2 px-4 py-1 bg-purple-800 rounded m-1 cursor-pointer"
+                        onClick={swap}
+                    >
+                        swap
+                    </button>
+                    <CurrInput
+                        currInputType="To"
+                        amount={convertedAmt}
+                        currency={toCurr}
+                        currList={currList}
+                        disableAmt
+                        onCurrencyChange={(currency) => {
+                            setFromCurr(currency);
+                        }}
+                        classNameStyle="mt-2"
+                    />
+                    <button
+                        className="px-4 py-1 pb-2 mt-4 bg-purple-800 rounded m-1 cursor-pointer "
                         onClick={convert}
                     >
-                        Convert {fromCurrency.toLowerCase()} to{" "}
-                        {toCurrency.toUpperCase()}
+                        Convert {fromCurr.toUpperCase()} to{" "}
+                        {toCurr.toUpperCase()}
                     </button>
                 </div>
             </div>
